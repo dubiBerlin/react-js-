@@ -143,5 +143,5 @@ class AppComponent extends Component {
 //     />
 //   </td>
 // </tr>
-
+const App = connect()(AppComponent);
 export default App;
