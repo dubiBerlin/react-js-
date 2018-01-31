@@ -23,8 +23,11 @@ class AppComponent extends Component {
   }
   // https://rallycoding.herokuapp.com/api/music_albums
   //http://www.json-generator.com/api/json/get/cgjmOLeGtK?indent=2
-  // Gives signal that the page is loaded so start the request
+  /* functionname: componentDidMount()
+     * purpose:  Gives signal that the page is loaded so start the request */
   componentDidMount() {
+    /* functionname: this.props.dispatch
+     * purpose:  calls the action and alerts rest of redux (reducer, store. aso) that an action happened */
     this.props.dispatch(fetchInfo());
   }
 
@@ -77,7 +80,7 @@ class AppComponent extends Component {
           <div className="row">
             <div className="col-sm-12">
               <p>Here we will list some data from sources!</p>
-              <div class="row">
+              <div className="row">
                 <div className="col-sm-3">
                   <Select
                     name="form-field-name"
@@ -88,7 +91,7 @@ class AppComponent extends Component {
                 </div>
               </div>
               <hr />
-              <div class="row">
+              <div className="row">
                 <div className="col-sm-9">
                   <Table striped bordered condensed hover>
                     <thead>
