@@ -9,7 +9,7 @@ import { INFO_FETCHED } from '../actions/actions_info';
  * It can be an empty array too.
  */
 const info = (state = [], action) => {
-  console.log('PAYLOAD', action.payload);
+  console.log(' reducers_info.js PAYLOAD', action.payload);
   switch (action.type) {
     case INFO_FETCHED:
       return action.payload;

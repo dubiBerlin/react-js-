@@ -8,7 +8,7 @@ export function fetchInfo() {
     })
       .then(response => response.json()) // formats the response to a json object
       .then(json => {
-        console.log(json);
+        console.log('\n\nactions_info JSON' + JSON.stringify(json));
         // dispatch alerts the reducer and gives him the action-info
         dispatch(loadInfo(json));
       })

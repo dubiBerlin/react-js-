@@ -44,7 +44,11 @@ class AppComponent extends Component {
 
   render() {
     var thumbnail_image_style = { width: '50px', height: '50px' };
-    const selectList = this.state.jsonList.map(item => {
+
+    console.log('App.js THIS PROPS: ' + JSON.stringify(this.props.info));
+
+    // preparing list for the selection widget
+    const selectList = this.props.info.map(item => {
       return { value: item.name, label: item.name };
     });
 
@@ -103,7 +107,7 @@ class AppComponent extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      {this.state.jsonList.map(item => {
+                      {this.props.info.map(item => {
                         if (
                           this.state.selectedOption === '' ||
                           item.name === this.state.selectedOption.value
@@ -140,7 +144,14 @@ class AppComponent extends Component {
 //   </td>
 // </tr>
 
-// connect() is imported function
-const App = connect()(AppComponent);
+// takes the universal state, which is definded in the reducers/index.js combineReducers method,
+// out of the global app enviornmant and puts it to the props of this component
+const mapStateToProps = state => {
+  console.log('App.js state: ' + JSON.stringify(state));
+  return state;
+};
+
+// connecting received props with the component
+const App = connect(mapStateToProps)(AppComponent);
 
 export default App;
