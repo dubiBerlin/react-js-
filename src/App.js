@@ -22,7 +22,7 @@ class App extends Component {
   //http://www.json-generator.com/api/json/get/cgjmOLeGtK?indent=2
   // Gives signal that the page is loaded so start the request
   componentDidMount() {
-    fetch('https://rallycoding.herokuapp.com/api/music_albums', {
+    fetch('http://www.json-generator.com/api/json/get/cgjmOLeGtK?indent=2', {
       method: 'GET'
     })
       .then(response => response.json()) // formats the response to a json object
@@ -49,6 +49,9 @@ class App extends Component {
 
   render() {
     var thumbnail_image_style = { width: '50px', height: '50px' };
+    const selectList = this.state.jsonList.map(item => {
+      return { value: item.name, label: item.name };
+    });
 
     return (
       <div>
@@ -82,38 +85,53 @@ class App extends Component {
           <div className="row">
             <div className="col-sm-12">
               <p>Here we will list some data from sources!</p>
-              <Select
-                name="form-field-name"
-                value={this.state.selectedOption.value}
-                onChange={this.handleChange.bind(this)}
-                options={[
-                  { value: 'one', label: 'One' },
-                  { value: 'two', label: 'Two' }
-                ]}
-              />
+              <div class="row">
+                <div className="col-sm-3">
+                  <Select
+                    name="form-field-name"
+                    value={this.state.selectedOption.value}
+                    onChange={this.handleChange.bind(this)}
+                    options={selectList}
+                  />
+                </div>
+              </div>
               <hr />
-              <Table striped bordered condensed hover>
-                <thead>
-                  <tr>
-                    <th>Title</th>
-                    <th>Artist</th>
-                    <th>Album</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {this.state.jsonList.map(item => {
-                    return (
+              <div class="row">
+                <div className="col-sm-9">
+                  <Table striped bordered condensed hover>
+                    <thead>
                       <tr>
-                        <td>{item.title}</td>
-                        <td>{item.artist}</td>
-                        <td>
-                          <img style={thumbnail_image_style} src={item.image} />
-                        </td>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Age</th>
+                        <th>Company</th>
                       </tr>
-                    );
-                  })}
-                </tbody>
-              </Table>;
+                    </thead>
+                    <tbody>
+                      {this.state.jsonList.map(item => {
+                        return (
+                          <tr>
+                            <td>{item.name}</td>
+                            <td>{item.address}</td>
+                            <td>{item.age}</td>
+                            <td>{item.company}</td>
+                          </tr>
+                          // <tr>
+                          //   <td>{item.title}</td>
+                          //   <td>{item.artist}</td>
+                          //   <td>
+                          //     <img
+                          //       style={thumbnail_image_style}
+                          //       src={item.image}
+                          //     />
+                          //   </td>
+                          // </tr>
+                        );
+                      })}
+                    </tbody>
+                  </Table>;
+                </div>
+              </div>
             </div>
           </div>
         </div>
