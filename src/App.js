@@ -109,24 +109,19 @@ class App extends Component {
                     </thead>
                     <tbody>
                       {this.state.jsonList.map(item => {
-                        return (
-                          <tr>
-                            <td>{item.name}</td>
-                            <td>{item.address}</td>
-                            <td>{item.age}</td>
-                            <td>{item.company}</td>
-                          </tr>
-                          // <tr>
-                          //   <td>{item.title}</td>
-                          //   <td>{item.artist}</td>
-                          //   <td>
-                          //     <img
-                          //       style={thumbnail_image_style}
-                          //       src={item.image}
-                          //     />
-                          //   </td>
-                          // </tr>
-                        );
+                        if (
+                          this.state.selectedOption === '' ||
+                          item.name === this.state.selectedOption.value
+                        ) {
+                          return (
+                            <tr>
+                              <td>{item.name}</td>
+                              <td>{item.address}</td>
+                              <td>{item.age}</td>
+                              <td>{item.company}</td>
+                            </tr>
+                          );
+                        }
                       })}
                     </tbody>
                   </Table>;
@@ -139,5 +134,14 @@ class App extends Component {
     );
   }
 }
-
+// <tr>
+//   <td>{item.title}</td>
+//   <td>{item.artist}</td>
+//   <td>
+//     <img
+//       style={thumbnail_image_style}
+//       src={item.image}
+//     />
+//   </td>
+// </tr>
 export default App;
