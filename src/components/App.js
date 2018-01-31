@@ -9,8 +9,11 @@ import {
 } from 'react-bootstrap';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
+import { connect } from 'react-redux';
 
-class App extends Component {
+import { fetchInfo } from './../actions/actions_info';
+
+class AppComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,18 +25,7 @@ class App extends Component {
   //http://www.json-generator.com/api/json/get/cgjmOLeGtK?indent=2
   // Gives signal that the page is loaded so start the request
   componentDidMount() {
-    fetch('http://www.json-generator.com/api/json/get/cgjmOLeGtK?indent=2', {
-      method: 'GET'
-    })
-      .then(response => response.json()) // formats the response to a json object
-      .then(json => {
-        this.setState({
-          jsonList: json
-        });
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    this.props.dispatch(fetchInfo());
   }
 
   handleChange(selectedOption) {
@@ -144,4 +136,8 @@ class App extends Component {
 //     />
 //   </td>
 // </tr>
+
+// connect() is imported function
+const App = connect()(AppComponent);
+
 export default App;
