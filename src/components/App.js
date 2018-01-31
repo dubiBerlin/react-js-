@@ -113,7 +113,7 @@ class AppComponent extends Component {
                           item.name === this.state.selectedOption.value
                         ) {
                           return (
-                            <tr>
+                            <tr key={'item-' + item.name}>
                               <td>{item.name}</td>
                               <td>{item.address}</td>
                               <td>{item.age}</td>
@@ -143,15 +143,5 @@ class AppComponent extends Component {
 //     />
 //   </td>
 // </tr>
-
-// takes the universal state, which is definded in the reducers/index.js combineReducers method,
-// out of the global app enviornmant and puts it to the props of this component
-const mapStateToProps = state => {
-  console.log('App.js state: ' + JSON.stringify(state));
-  return state;
-};
-
-// connecting received props with the component
-const App = connect(mapStateToProps)(AppComponent);
 
 export default App;
