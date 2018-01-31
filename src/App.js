@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+import {
+  Navbar,
+  Nav,
+  NavItem,
+  NavDropdown,
+  MenuItem,
+  Table
+} from 'react-bootstrap';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
@@ -15,12 +22,14 @@ class App extends Component {
   //http://www.json-generator.com/api/json/get/cgjmOLeGtK?indent=2
   // Gives signal that the page is loaded so start the request
   componentDidMount() {
-    fetch('http://www.json-generator.com/api/json/get/cgjmOLeGtK?indent=2', {
+    fetch('https://rallycoding.herokuapp.com/api/music_albums', {
       method: 'GET'
     })
       .then(response => response.json()) // formats the response to a json object
       .then(json => {
-        console.log(json);
+        this.setState({
+          jsonList: json
+        });
       })
       .catch(error => {
         console.log(error);
@@ -39,6 +48,8 @@ class App extends Component {
   }
 
   render() {
+    var thumbnail_image_style = { width: '50px', height: '50px' };
+
     return (
       <div>
         <Navbar inverse collapseOnSelect>
@@ -80,6 +91,29 @@ class App extends Component {
                   { value: 'two', label: 'Two' }
                 ]}
               />
+              <hr />
+              <Table striped bordered condensed hover>
+                <thead>
+                  <tr>
+                    <th>Title</th>
+                    <th>Artist</th>
+                    <th>Album</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {this.state.jsonList.map(item => {
+                    return (
+                      <tr>
+                        <td>{item.title}</td>
+                        <td>{item.artist}</td>
+                        <td>
+                          <img style={thumbnail_image_style} src={item.image} />
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </Table>;
             </div>
           </div>
         </div>
